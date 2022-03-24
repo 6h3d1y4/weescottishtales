@@ -2,53 +2,47 @@
 .navbar-brand {
   font-size: 35px;
 }
-.nav {
-  font-family: 'Handlee', cursive;
-  font-family: 'Kaushan Script', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Short Stack', cursive;
- font-size:x-large;
- align-content: space-evenly;
-}
 .navbar {
+  padding-top: 30px;
   font-family: 'Handlee', cursive;
   font-family: 'Kaushan Script', cursive;
   font-family: 'Montserrat', sans-serif;
   font-family: 'Short Stack', cursive;
- font-size:x-large;
- align-content: space-evenly;
+  font-size:x-large;
+  align-content: space-evenly;
 }
 
 /* Body styling */
-* {border: 0 !important; }
-body::-webkit-scrollbar{
-  display: none;
-}
+html {overflow: -moz-scrollbars-none;}
 body{
-    -ms-overflow-style: none;
+  overflow: auto;
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 /* Video background */
 video {
-  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
+  z-index: -1;
 }
 
-.overlayText {
-  position:absolute;
-   top:30%;
-   left:20%;
-   z-index:1;
- }
- 
- #topText {
-   color: white;
-   font-size: 20px;
-   align-self: center;
- }
+/* Overlay text */
+.overlay {
+  position: center;
+  color: #fff;
+  text-align: center;
+  margin-top: 45vh;
+}
+.display-3{
+  font-size: 75px;
+  font-family: 'Short Stack', cursive;
+}
+.lead{
+  font-size: 50px;
+  font-family: 'Short Stack', cursive;
+}
