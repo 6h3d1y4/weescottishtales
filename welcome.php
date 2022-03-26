@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+ 
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +18,7 @@
     <!-- Bootstrap CSS v5.1.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Additional CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="page.css">
     <!-- Additional Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,47 +36,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a style="color:white;" class="nav-link active" aria-current="page" href="#">Home</a>
+        <a style="color:white;" class="nav-link active" aria-current="page" href="index.php">Home</a>
         <a style="color:white;" class="nav-link" href="#">Castles</a>
         <a style="color:white;" class="nav-link" href="#">Museums</a>
         <a style="color:white;" class="nav-link" href="#">Nightlife</a>
-        <a style="color:white;" class="nav-link" href="userlogin.php">Login</a>
-        <a style="color:white;" class="nav-link" href="signup.php">Signup</a>
-      <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button style="color:white;font-size:x-large;" class="btn" type="submit">Search</button>
-      </form>
+        <a style="color:white;" class="nav-link" href="logout.php">Logout</a>
+        <a style="color:white;" class="nav-link" href="reset.php">Reset Password</a>
       </div>
     </div>
   </div>
 </nav>
 </div>
+<!-- Welcome message -->
+    </nav>
+    <h3 class="my-5">Hi <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>, Fit Like? Welcome to Wee Scottish Tales! <p>You can now read all the stories!</p></h3>
 
-  <!-- Background Video -->
-
-  <video playsinline autoplay muted loop>
-    <source src="bgvideo.webm" type="video/webm">
-  </video>
-
-  <!-- Website tagline overlay on the video -->
-  <div class="overlay"></div>
-  <div class="container h-100">
-    <div class="d-flex h-100 text-center align-items-center">
-      <div class="w-100 text-white">
-        <h1 class="display-3">Stories from the highlands..<p>told by scots!<p></h1>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Bootstrap Popper and Javascript Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-    crossorigin="anonymous"></script>
 </body>
-
 </html>

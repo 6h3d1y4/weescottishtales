@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate firstname
     if(empty(trim($_POST["first_name"]))){
         $first_name_err = "Please enter your first name.";
-    } elseif(!preg_match('/^[a-zA-Z_]+$/', trim($_POST["first_name"]))){
+    } elseif(!preg_match('/^[a-zA-Z]+$/', trim($_POST["first_name"]))){
         $first_name_err = "Firstname can only contain letters.";
     } else{
         // Prepare a select statement
@@ -193,7 +193,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: login.php");
+                header("location: userlogin.php");
                 // echo "Data sent";
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -240,7 +240,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <a style="color:white;" class="nav-link" href="#">Castles</a>
         <a style="color:white;" class="nav-link" href="#">Museums</a>
         <a style="color:white;" class="nav-link" href="#">Nightlife</a>
-        <a style="color:white;" class="nav-link" href="#">Login</a>
+        <a style="color:white;" class="nav-link" href="userlogin.php">Login</a>
         <a style="color:white;" class="nav-link" href="signup.php">Signup</a>
       <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
