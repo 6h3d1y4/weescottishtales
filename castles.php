@@ -59,7 +59,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                  while($row = mysqli_fetch_array($result)){
                                         echo "<div class='col-lg-3 col-md-4 col-sm6 col-xs-12 mt-4'>
                                         <div class='card text-center'>
-                                        <img style='border-radius:5%;color:black;' src='...' class='card-img-top' alt='...'>
+                                        <img style='border-radius:5%;color:black;' src='upload/images/$row[story_title].jpg' class='card-img-top' alt='...'>
                                         <div class='card-body'>
                                         <h5 style='color:black;' class='card-title'>" . $row['story_title'] . "</h5>
                                         <p class='card-text'>Story By: " . $row['username'] . "</p>
