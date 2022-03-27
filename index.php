@@ -26,8 +26,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a style="color:white;" class="nav-link active" aria-current="page" href="#">Home</a>
-        <a style="color:white;" class="nav-link" href="#">Castles</a>
-        <a style="color:white;" class="nav-link" href="#">Museums</a>
+        <a style="color:white;" class="nav-link" href="castles.php">Castles</a>
+        <a style="color:white;" class="nav-link" href="museums.php">Museums</a>
         <a style="color:white;" class="nav-link" href="#">Nightlife</a>
         <a style="color:white;" class="nav-link" href="userlogin.php">Login</a>
         <a style="color:white;" class="nav-link" href="signup.php">Signup</a>

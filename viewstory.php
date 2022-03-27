@@ -94,6 +94,8 @@ if(isset($_GET["username"]) && !empty(trim($_GET["username"]))){
   </div>
 </nav>
 
+
+
 </nav>
 <div class="wrapper" style="width:600px; margin-left:475px; text-align:center;">
         <div class="container-fluid">

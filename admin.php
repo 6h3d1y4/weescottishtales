@@ -67,7 +67,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 <div class="col-12 text-center">
                     <div class="clearfix">
                         <h2 style="color:white;">User List</h2>
-                        <a href="addusers.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add a new user</a>
+                        <a style="margin:5px;" href="addusers.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add a new user</a>
                     </div>
                     <?php
                     // Include config file
@@ -77,7 +77,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     $sql = "SELECT * FROM users";
                     if($result = mysqli_query($connection, $sql)){
                         if(mysqli_num_rows($result) > 0){
-                            echo '<table class="table table-bordered table-striped">';
+                            echo '<table class="table table-dark table-sm table-bordered table-striped align-middle">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th style='color:white;'>First Name</th>";
@@ -152,7 +152,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     $sql = "SELECT * FROM story";
                     if($result = mysqli_query($connection, $sql)){
                         if(mysqli_num_rows($result) > 0){
-                            echo '<table class="table table-bordered table-striped">';
+                            echo '<table class="table table-dark table-sm table-bordered table-striped align-middle">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th style='color:white;'>Story Title</th>";

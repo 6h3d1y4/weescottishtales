@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$first_name = $last_name = $username  = $email = $password = $phone =  $confirm_password = "";
-$first_name_err = $last_name_err = $username_err = $email_err = $password_err = $phone_err =  $confirm_password_err = "";
+$first_name = $last_name = $username  = $email = $password = $phone =  $confirm_password = $is_admin = "";
+$first_name_err = $last_name_err = $username_err = $email_err = $password_err = $phone_err =  $confirm_password_err = $is_admin_err = "";
 
  
 // Processing form data when form is submitted
@@ -172,15 +172,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 }
 
+    // Validate admin
+    if(empty(trim($_POST["is_admin"]))){
+        $is_admin_err = "Please specify if the user has admin privileges.";
+    } elseif(!preg_match('^(?:Yes\b|No\b)^', trim($_POST["is_admin"]))){
+        $is_admin_err = "Please enter either Yes or No";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE is_admin = ?";
+        
+        if($stmt = mysqli_prepare($connection, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_is_admin);
+            
+            // Set parameters
+            $param_firstname = trim($_POST["is_admin"]);
+            
+           // Attempt to execute the prepared statement
+           if(mysqli_stmt_execute($stmt)){
+            /* store result */
+            mysqli_stmt_store_result($stmt);
+            $is_admin = trim($_POST["is_admin"]);
+            }
+                // Close statement
+        mysqli_stmt_close($stmt);
+    }
+}
     // Check input errors before inserting in database
-    if(empty($first_name_err) && empty($last_name_err) && empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($phone_err)){
+    if(empty($first_name_err) && empty($last_name_err) && empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($phone_err) && empty($is_admin_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (first_name, last_name, username, email, password, phone) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (first_name, last_name, username, email, password, phone, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($connection, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_firstname, $param_lastname, $param_username, $param_email, $param_password, $param_phone);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_firstname, $param_lastname, $param_username, $param_email, $param_password, $param_phone, $param_is_admin);
             
             // Set parameters
             $param_firstname = $first_name;
@@ -189,11 +215,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_phone = $phone;
+            $param_is_admin = $is_admin;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: userlogin.php");
+                header("location: admin.php");
                 // echo "Data sent";
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -252,9 +279,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </nav>
 </div>
 
-    <h3>Sign Up</h3>
-        <h5>Please fill this form to create an account.</h5>
-    <div class="wrapper" style="width:300px; margin-left:650px;">
+    <h3>Add a New User</h3>
+        <div class="wrapper" style="width:300px; margin-left:650px;">
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
@@ -293,11 +319,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-primary ml-2" value="Reset">
+                <label style="color:white;" >Is the user an Administrator?</label>
+                <input type="is_admin" name="is_admin" class="form-control <?php echo (!empty($is_admin_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $is_admin; ?>">
+                <span class="invalid-feedback"><?php echo $is_admin_err; ?></span>
             </div>
-            <p style="color:white;" >Already have an account? <a style="color:white;" href="login.php">Login here</a>.</p>
-        </form>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-primary" value="Reset">
+                <a style="margin:5px;" href="admin.php" class="btn btn-primary">Back</a>
+            </div>
+            </form>
     </div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -37,7 +37,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a style="color:white;" class="nav-link active" aria-current="page" href="index.php">Home</a>
-        <a style="color:white;" class="nav-link" href="#">Castles</a>
+        <a style="color:white;" class="nav-link" href="castles.php">Castles</a>
         <a style="color:white;" class="nav-link" href="#">Museums</a>
         <a style="color:white;" class="nav-link" href="#">Nightlife</a>
         <a style="color:white;" class="nav-link" href="logout.php">Logout</a>
