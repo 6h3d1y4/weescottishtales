@@ -3,6 +3,7 @@
 session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
+
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
     exit;
@@ -35,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ? AND is_admin = 'No'";
+        $sql = "SELECT id, username, password FROM users WHERE is_admin = 'No' AND username = ? ";
         
         if($stmt = mysqli_prepare($connection, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -54,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
-                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();

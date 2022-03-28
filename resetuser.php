@@ -5,18 +5,19 @@ if(isset($_POST["username"]) && !empty($_POST["username"])){
     require_once "config.php";
     
  // Prepare a select statement
- $sql = "UPDATE users SET password = 'pass@123' WHERE username = ?";
+ $sql = "UPDATE users SET password = ? WHERE username = ?";
     
  if($stmt = mysqli_prepare($connection, $sql)){
      // Bind variables to the prepared statement as parameters
-     mysqli_stmt_bind_param($stmt, "s", $param_username);
+     mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_username);
      
      // Set parameters
+     $param_password = password_hash('pass@123', PASSWORD_DEFAULT);
      $param_username = trim($_POST["username"]);
      
      // Attempt to execute the prepared statement
      if(mysqli_stmt_execute($stmt)){
-        // Records deleted successfully. Redirect to landing page
+        // Record updated successfully. Redirect to landing page
         header("location: admin.php");
         exit();
     } else{

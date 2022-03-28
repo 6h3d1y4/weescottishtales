@@ -113,18 +113,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
             // Set parameters
-            $param_firstname = trim($_POST["email"]);
+            $param_email = trim($_POST["email"]);
             
            // Attempt to execute the prepared statement
            if(mysqli_stmt_execute($stmt)){
             /* store result */
             mysqli_stmt_store_result($stmt);
-            $email = trim($_POST["email"]);
+
+            if(mysqli_stmt_num_rows($stmt) == 1){
+                $email_err = "This email id is already taken.";
+            } else{
+                $email = trim($_POST["email"]);
             }
-                // Close statement
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+
+        // Close statement
         mysqli_stmt_close($stmt);
     }
 }
+
+
 
     // Validate password
     if(empty(trim($_POST["password"]))){
@@ -159,7 +169,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_bind_param($stmt, "s", $param_phone);
             
             // Set parameters
-            $param_firstname = trim($_POST["phone"]);
+            $param_phone = trim($_POST["phone"]);
             
            // Attempt to execute the prepared statement
            if(mysqli_stmt_execute($stmt)){

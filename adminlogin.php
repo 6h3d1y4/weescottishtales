@@ -2,9 +2,9 @@
 // Initialize the session
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Check if the user is already logged in, if yes then redirect him to admin page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: userlogin.php");
+    header("location: admin.php");
     exit;
 }
  
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials to check if the user is admin
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT username, password FROM users WHERE username = ? AND is_admin = 'Yes'";
+        $sql = "SELECT id, username, password FROM users WHERE is_admin = 'Yes' AND username = ?";
         
         if($stmt = mysqli_prepare($connection, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -52,15 +52,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
-                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                       
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;
                          
                             // Redirect user to admin page
