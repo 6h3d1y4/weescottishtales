@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: userlogin.php");
+    exit;
+}
+?>
 <?php include "header.php"; ?> 
     
     <div class="wrapper" style="width:300px; margin-left:650px;">
