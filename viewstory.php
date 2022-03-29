@@ -101,7 +101,7 @@ if(isset($_GET["story_title"]) && !empty(trim($_GET["story_title"]))){
     <br>
     <br>
      </div>
-     <p><a style="margin:5px;" href="index.php" class="btn btn-primary">Back</a>
+     <p><a style="margin:5px;" href="castles.php" class="btn btn-primary">Back</a>
     </div>
 
     <?php include "footer.php"; ?> 
