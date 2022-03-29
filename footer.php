@@ -1,4 +1,4 @@
-  <footer>
+  <footer id="footer">
   <hr style="color:white;">
 <h5>&#169; Wee Scottish Tales</h5>
   </footer>
