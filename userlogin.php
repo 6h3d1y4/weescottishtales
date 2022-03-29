@@ -117,10 +117,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a style="color:white;" class="nav-link active" aria-current="page" href="#">Home</a>
-        <a style="color:white;" class="nav-link" href="#">Castles</a>
-        <a style="color:white;" class="nav-link" href="#">Museums</a>
-        <a style="color:white;" class="nav-link" href="#">Nightlife</a>
+        <a style="color:white;" class="nav-link active" aria-current="page" href="index.php">Home</a>
+        <a style="color:white;" class="nav-link" href="castles.php">Castles</a>
+        <a style="color:white;" class="nav-link" href="museums.php">Museums</a>
+        <a style="color:white;" class="nav-link" href="uploadpage.php">Upload</a>
         <a style="color:white;" class="nav-link" href="userlogin.php">Login</a>
         <a style="color:white;" class="nav-link" href="signup.php">Signup</a>
       <form class="d-flex">
@@ -159,8 +159,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p style="color:white;" >Don't have an account? <a style="color:white;" href="signup.php">Sign up here</a></p>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
-</body>
-</html>
+    <?php include "footer.php"; ?> 
